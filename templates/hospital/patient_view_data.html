@@ -1,0 +1,64 @@
+{% extends 'hospital/patient_base.html' %}
+{% block content %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+    
+    .input-container {
+        margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+        padding: 8px;
+        font-size: 16px;
+    }
+    
+    .record-details {
+        margin-top: 20px;
+    }
+    
+    .record-details p {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Patient Record</h1>
+        <div class="input-container">
+            <label for="patientId">Enter Patient ID:</label>
+            <input type="text" id="patientId" placeholder="Patient ID">
+            <button  class = "btn btn-primary"onclick="fetchRecord()">Fetch Record</button>
+        </div>
+        <div id="recordDetails" class="record-details">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sunt quae unde dolorum magnam minus explicabo corporis porro! Impedit id placeat reiciendis ipsa fuga. Accusamus iusto dicta numquam quae est!</p>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+
+
+{% endblock content %}
