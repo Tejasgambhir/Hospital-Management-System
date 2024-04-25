@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
 from django.conf import settings
 from django.db.models import Q
-from .main import write_csv,pseudo_main
+
 # Create your views here.
 def home_view(request):
     if request.user.is_authenticated:
@@ -506,23 +506,6 @@ def admin_view_appointment_view(request):
     appointments=models.Appointment.objects.all().filter(status=True)
     return render(request,'hospital/admin_view_appointment.html',{'appointments':appointments})
 
-@login_required(login_url='adminlogin')
-@user_passes_test(is_admin)
-def scheduleclick_view(request):
-    List = pseudo_main()
-    Que = []
-    Time = []
-    for i in List:
-        for j in range(len(i)):
-            Que.append(i[j][1])
-            Time.append(i[j][3])
-    appointments =[]
-    
-    for i in Que:
-        newList=models.Appointment.objects.get(id=i)
-        appointments.append(newList)
-        print(newList)
-    return render(request,'hospital/admin_view_appointment.html',{'appointments':appointments})
 
 
 
