@@ -144,4 +144,4 @@ EMAIL_HOST_USER = 'from@gmail.com' # this email will be used to send emails
 EMAIL_HOST_PASSWORD = 'xyz' # host email password required
 EMAIL_RECEIVING_USER = ['to@gmail.com'] # email on which you will receive messages sent from website
 
-ALLOWED_HOSTS = ['192.168.103.66']
+ALLOWED_HOSTS = ['192.168.103.66','127.0.0.1']
