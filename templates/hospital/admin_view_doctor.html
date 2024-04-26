@@ -36,6 +36,7 @@
           <th>Mobile</th>
           <th>Address</th>
           <th>Department</th>
+          <th>Availability</th>
           <th>Update</th>
           <th>Delete</th>
         </tr>
@@ -48,6 +49,9 @@
         <td>{{d.mobile}}</td>
         <td>{{d.address}}</td>
         <td>{{d.department}}</td>
+        <td>
+          <a href="{% url 'deactivate-doctor' d.id  %}"><input type="checkbox" checked>
+            <span class="slider round"></span></a></td>
         <td><a class="btn btn-primary btn-xs" href="{% url 'update-doctor' d.id  %}"><span class="glyphicon glyphicon-edit"></span></a></td>
         <td><a class="btn btn-danger btn-xs" href="{% url 'delete-doctor-from-hospital' d.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
       </tr>
@@ -58,3 +62,4 @@
 
 
 {% endblock content %}
+
