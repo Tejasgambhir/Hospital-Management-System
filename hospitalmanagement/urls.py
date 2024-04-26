@@ -39,6 +39,7 @@ urlpatterns = [
     path('admin-doctor', views.admin_doctor_view,name='admin-doctor'),
     path('admin-view-doctor', views.admin_view_doctor_view,name='admin-view-doctor'),
     path('delete-doctor-from-hospital/<int:pk>', views.delete_doctor_from_hospital_view,name='delete-doctor-from-hospital'),
+    path('deactivate-doctor/<int:pk>', views.deactivate_doctor_view,name='deactivate-doctor'),
     path('update-doctor/<int:pk>', views.update_doctor_view,name='update-doctor'),
     path('admin-add-doctor', views.admin_add_doctor_view,name='admin-add-doctor'),
     path('admin-approve-doctor', views.admin_approve_doctor_view,name='admin-approve-doctor'),

@@ -191,6 +191,14 @@ def delete_doctor_from_hospital_view(request,pk):
     doctor.delete()
     return redirect('admin-view-doctor')
 
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def deactivate_doctor_view(request,pk):
+    doctor=models.Doctor.objects.get(id=pk)
+    user=models.User.objects.get(id=doctor.user_id)
+    user.is_active= not (user.is_active)
+    doctor.is_active= not (doctor.is_active)
+    return redirect('admin-view-doctor')
 
 
 @login_required(login_url='adminlogin')

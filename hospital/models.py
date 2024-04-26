@@ -17,6 +17,7 @@ class Doctor(models.Model):
     mobile = models.CharField(max_length=10,blank=False,null=True)
     department= models.CharField(max_length=50,choices=departments,default='Cardiologist')
     status=models.BooleanField(default=False)
+    is_active=models.BooleanField(default=True)
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name
