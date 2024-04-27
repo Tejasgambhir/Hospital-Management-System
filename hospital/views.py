@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.shortcuts import render,redirect,reverse
 from . import forms,models
 from django.db.models import Sum
@@ -8,6 +9,10 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
 from django.conf import settings
 from django.db.models import Q
+from django.utils.crypto import get_random_string
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 # Create your views here.
 def home_view(request):
@@ -16,26 +21,26 @@ def home_view(request):
     return render(request,'hospital/index.html')
 
 
-#for showing signup/login button for admin(by sumit)
+#for showing signup/login button for admin()
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'hospital/adminclick.html')
 
 
-#for showing signup/login button for doctor(by sumit)
+#for showing signup/login button for doctor()
 def doctorclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'hospital/doctorclick.html')
 
 
-#for showing signup/login button for patient(by sumit)
+#for showing signup/login button for patient()
 def patientclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'hospital/patientclick.html')
-#for showing signup/login button for patient(by sumit)
+#for showing signup/login button for patient()
 
 
 
@@ -98,7 +103,45 @@ def patient_signup_view(request):
     return render(request,'hospital/patientsignup.html',context=mydict)
 
 
-
+def password_reset(request):
+    password_reset_form =forms.PasswordResetForm()
+    mydict={'password_reset_form':password_reset_form}
+    if request.method == 'POST':
+        form = forms.PasswordResetForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            try:
+                user = User.objects.get(username=username)
+                new_password = get_random_string(length=8)  # Generate a new random password
+                user.set_password(new_password)
+                print(new_password)
+                user.save()
+                
+                # Send email with new password
+                send_mail(
+                    'Password Reset Confirmation - Health Care',
+                    f"""
+Dear [Recipient's Name],
+We hope this message finds you well. 
+This is to confirm that your password has been successfully reset for your Health Care account.
+Your new password is: {new_password}.
+For added security, we recommend updating your password after login.
+Please ensure to keep this information secure.
+Best regards,
+Health Care Support Team
+""",
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+                messages.success(request, 'Password reset email sent. Check your inbox.')
+                return redirect('/')  # Redirect to login page
+            except User.DoesNotExist:
+                messages.error(request, 'User with this username does not exist.')
+    else:
+        form = forms.PasswordResetForm()
+    return render(request, 'hospital/doctor_password_reset.html', {'form': form})
 
 
 

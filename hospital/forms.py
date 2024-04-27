@@ -14,7 +14,7 @@ class AdminSigupForm(forms.ModelForm):
         }
 
 
-#for student related form
+#for Doctor related form
 class DoctorUserForm(forms.ModelForm):
     class Meta:
         model=User
@@ -27,9 +27,11 @@ class DoctorForm(forms.ModelForm):
         model=models.Doctor
         fields=['address','mobile','department','status','profile_pic']
 
+class PasswordResetForm(forms.Form):
+    username = forms.CharField(label='Username')
+    email = forms.EmailField(label='Email')
 
-
-#for teacher related form
+#for Patient related form
 class PatientUserForm(forms.ModelForm):
     class Meta:
         model=User
