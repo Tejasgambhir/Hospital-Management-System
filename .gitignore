@@ -11,3 +11,5 @@ media
 
 # Visual Studio Code #
 .vscode/*
+
+settings.py
