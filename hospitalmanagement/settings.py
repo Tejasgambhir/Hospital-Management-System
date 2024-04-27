@@ -141,6 +141,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sushrut.patil21@vit.edu' # this email will be used to send emails
-EMAIL_HOST_PASSWORD = 'h.68:FgCaWt!7bb' # host email password required
+EMAIL_HOST_PASSWORD = "" # host email password required
 
 ALLOWED_HOSTS = ['192.168.103.66','127.0.0.1']
