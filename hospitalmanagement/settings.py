@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+from dotenv import find_dotenv
+
+# Load environment variables from .env file
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +27,8 @@ STATIC_DIR=os.path.join(BASE_DIR,'static')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hpbv()ep00boce&o0w7z1h)st148(*m@6@-rk$nn)(n9ojj4c0'
+
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,7 +88,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'hospitaldb',
 		'USER': 'root',
-		'PASSWORD': 'sush8426',
+		'PASSWORD': os.getenv("PASSWORD"),
 		'HOST':'127.0.0.1',
 		'PORT':'3306',
 	}
@@ -140,7 +146,7 @@ EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sushrut.patil21@vit.edu' # this email will be used to send emails
-EMAIL_HOST_PASSWORD = "" # host email password required
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER") # this email will be used to send emails
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD") # host email password required
 
 ALLOWED_HOSTS = ['192.168.103.66','127.0.0.1']
