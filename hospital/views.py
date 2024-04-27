@@ -102,6 +102,13 @@ def patient_signup_view(request):
         return HttpResponseRedirect('patientlogin')
     return render(request,'hospital/patientsignup.html',context=mydict)
 
+#-----------for checking user is doctor , patient or admin(by sumit)
+def is_admin(user):
+    return user.groups.filter(name='ADMIN').exists()
+def is_doctor(user):
+    return user.groups.filter(name='DOCTOR').exists()
+def is_patient(user):
+    return user.groups.filter(name='PATIENT').exists()
 
 def password_reset(request):
     password_reset_form =forms.PasswordResetForm()
@@ -136,23 +143,13 @@ Health Care Support Team
                     fail_silently=False,
                 )
                 messages.success(request, 'Password reset email sent. Check your inbox.')
-                return redirect('/')  # Redirect to login page
+                if (is_doctor(user)): return redirect('/doctorlogin')
+                elif (is_patient(user)): return redirect('/patientlogin')  # Redirect to login page
             except User.DoesNotExist:
                 messages.error(request, 'User with this username does not exist.')
     else:
         form = forms.PasswordResetForm()
     return render(request, 'hospital/doctor_password_reset.html', {'form': form})
-
-
-
-#-----------for checking user is doctor , patient or admin(by sumit)
-def is_admin(user):
-    return user.groups.filter(name='ADMIN').exists()
-def is_doctor(user):
-    return user.groups.filter(name='DOCTOR').exists()
-def is_patient(user):
-    return user.groups.filter(name='PATIENT').exists()
-
 
 #---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,DOCTOR OR PATIENT
 def afterlogin_view(request):
