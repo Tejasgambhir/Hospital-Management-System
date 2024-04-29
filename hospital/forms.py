@@ -25,7 +25,7 @@ class DoctorUserForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model=models.Doctor
-        fields=['address','mobile','department','status','profile_pic']
+        fields=['address','mobile','department','status','profile_pic','education']
 
 class PasswordResetForm(forms.Form):
     username = forms.CharField(label='Username')
@@ -52,14 +52,18 @@ class AppointmentForm(forms.ModelForm):
     patientId=forms.ModelChoiceField(queryset=models.Patient.objects.all().filter(status=True),empty_label="Patient Name and Symptoms", to_field_name="user_id")
     class Meta:
         model=models.Appointment
-        fields=['description','status']
+        fields=['appointmentDate','description','status','time']
 
 
 class PatientAppointmentForm(forms.ModelForm):
     doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
     class Meta:
         model=models.Appointment
-        fields=['description','status']
+        fields=['appointmentDate','description','status','time']
+        widgets = {
+        'appointmentDate': forms.DateInput()
+        ,'time': forms.TimeInput()
+        }
 
 
 #for contact us page
