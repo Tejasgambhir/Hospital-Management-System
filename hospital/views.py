@@ -362,7 +362,7 @@ def update_patient_view(request,pk):
     patient=models.Patient.objects.get(id=pk)
     user=models.User.objects.get(id=patient.user_id)
 
-    userForm=forms.PatientUserForm(instance=user)
+    userForm=forms.PatientUserForm(instance=user)   
     patientForm=forms.PatientForm(request.FILES,instance=patient)
     mydict={'userForm':userForm,'patientForm':patientForm}
     if request.method=='POST':

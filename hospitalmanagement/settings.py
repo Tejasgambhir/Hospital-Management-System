@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -84,16 +84,11 @@ WSGI_APPLICATION = 'hospitalmanagement.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'hospitaldb',
-		'USER': 'root',
-		'PASSWORD': os.getenv("PASSWORD"),
-		'HOST':'127.0.0.1',
-		'PORT':'3306',
-	}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -149,4 +144,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER") # this email will be used to send emails
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD") # host email password required
 
-ALLOWED_HOSTS = ['192.168.103.66','127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1']
