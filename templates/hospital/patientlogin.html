@@ -56,7 +56,13 @@
   <br>
   <br>
   <br><br>
-
+  {% if messages %}
+    <script>
+      {% for message in messages %}
+        alert("{{ message }}");
+      {% endfor %}
+    </script>
+  {% endif %}
   <!--- login page for patient by admin(sumit)  ---------->
   <form method="post">
     {% csrf_token %}
