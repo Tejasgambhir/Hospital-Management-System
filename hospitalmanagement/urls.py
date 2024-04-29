@@ -25,9 +25,9 @@ urlpatterns = [
     path('doctorsignup', views.doctor_signup_view,name='doctorsignup'),
     path('patientsignup', views.patient_signup_view),
     
-    path('adminlogin', LoginView.as_view(template_name='hospital/adminlogin.html')),
-    path('doctorlogin', LoginView.as_view(template_name='hospital/doctorlogin.html')),
-    path('patientlogin', LoginView.as_view(template_name='hospital/patientlogin.html')),
+    path('adminlogin', views.AdminLoginView.as_view(template_name='hospital/adminlogin.html')),
+    path('doctorlogin', views.DoctorLoginView.as_view(template_name='hospital/doctorlogin.html')),
+    path('patientlogin', views.PatientLoginView.as_view(template_name='hospital/patientlogin.html')),
 
     path('password-reset', views.password_reset, name='password-reset'),
     path('afterlogin', views.afterlogin_view,name='afterlogin'),
