@@ -13,6 +13,7 @@ from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 def home_view(request):
@@ -42,9 +43,21 @@ def patientclick_view(request):
     return render(request,'hospital/patientclick.html')
 #for showing signup/login button for patient()
 
+class CustomLoginView(LoginView):
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field.title()}: {error}")
+        return super().form_invalid(form)
 
+class AdminLoginView(CustomLoginView):
+    template_name = 'hospital/adminlogin.html'
 
+class DoctorLoginView(CustomLoginView):
+    template_name = 'hospital/doctorlogin.html'
 
+class PatientLoginView(CustomLoginView):
+    template_name = 'hospital/patientlogin.html'
 
 def admin_signup_view(request):
     form=forms.AdminSigupForm()

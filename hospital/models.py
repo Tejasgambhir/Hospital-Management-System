@@ -16,6 +16,7 @@ class Doctor(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=10,blank=False,null=True)
     department= models.CharField(max_length=50,choices=departments,default='Cardiologist')
+    education = models.CharField(max_length=50,null=True)
     status=models.BooleanField(default=False)
     is_active=models.BooleanField(default=True)
     @property
@@ -35,7 +36,6 @@ class Patient(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=10,blank=False,null=False)
     symptoms = models.CharField(max_length=100,null=False)
-    assignedDoctorId = models.PositiveIntegerField(null=True)
     admitDate=models.DateField(auto_now=True)
     status=models.BooleanField(default=False)
     @property
@@ -53,9 +53,10 @@ class Appointment(models.Model):
     doctorId=models.PositiveIntegerField(null=True)
     patientName=models.CharField(max_length=40,null=True)
     doctorName=models.CharField(max_length=40,null=True)
-    appointmentDate=models.DateField(auto_now=True)
+    appointmentDate=models.DateField(default=None, null=True)
     description=models.TextField(max_length=500)
     status=models.BooleanField(default=False)
+    time = models.TimeField(default=None, null=True)
 
 
 
