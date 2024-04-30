@@ -36,6 +36,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=10,blank=False,null=False)
     symptoms = models.CharField(max_length=100,null=False)
+    assignedDoctorId = models.PositiveIntegerField(null=True)
     admitDate=models.DateField(auto_now=True)
     status=models.BooleanField(default=False)
     @property
