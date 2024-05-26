@@ -49,11 +49,7 @@
         <td>{{d.mobile}}</td>
         <td>{{d.address}}</td>
         <td>{{d.department}}</td>
-        <td>
-          <a href="{% url 'deactivate-doctor' d.id  %}"><span class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-          </span>
-          </a></td>
+        <td><a class="btn btn-primary btn-xs toggle" onclick="toggle({{d.is_active}})" href="{% url 'deactivate-doctor' d.id  %}"></a></td>
         <td><a class="btn btn-primary btn-xs" href="{% url 'update-doctor' d.id  %}"><span class="glyphicon glyphicon-edit"></span></a></td>
         <td><a class="btn btn-danger btn-xs" href="{% url 'delete-doctor-from-hospital' d.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
       </tr>
@@ -61,7 +57,29 @@
     </table>
   </div>
 </div>
+<script>
+  // Get the toggle button element
+const toggleButton = document.querySelector('.toggle');
 
+// Variable to track toggle state
+let isToggled = true;
+
+// Function to toggle state, update button text, and change background color
+function toggle(value) {
+    isToggled = !value;
+    toggleButton.textContent = isToggled ? 'On' : 'Off';
+    toggleButton.style.backgroundColor = isToggled ? 'green' : 'red'; // Change background color based on toggle state
+}
+
+// Add click event listener to toggle button
+window.onload = function() {
+  // Set the default value for is_active
+  document.getElementById('is_active').value = 'true';
+
+  // Optional: Output the default value of is_active
+  console.log("Default is_active:", document.getElementById('is_active').value);
+};
+</script>
 
 {% endblock content %}
 

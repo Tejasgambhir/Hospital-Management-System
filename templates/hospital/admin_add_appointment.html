@@ -66,7 +66,12 @@
             <div class="form-group">
               {% render_field appointmentForm.patientId class="form-control" placeholder="patient" %}
             </div>
-
+            <div class="form-group">
+              {% render_field appointmentForm.appointmentDate class="form-control" id="id_appointmentDate" placeholder="Appointment Date" %}
+            </div>
+            <div class="form-group">
+              {% render_field appointmentForm.time class="form-control" id="id_time" placeholder="Time" %}
+            </div>
           </div>
 
         </div>
