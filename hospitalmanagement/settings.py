@@ -87,7 +87,7 @@ DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'hospitaldb',
-		'USER': 'root',
+		'USER': os.getenv("USER"),
 		'PASSWORD': os.getenv("PASSWORD"),
 		'HOST':'127.0.0.1',
 		'PORT':'3306',
@@ -148,5 +148,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER") # this email will be used to send emails
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD") # host email password required
-
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['192.168.103.66','127.0.0.1']
