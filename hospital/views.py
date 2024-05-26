@@ -1,4 +1,5 @@
 from pyexpat.errors import messages
+import time
 from django.shortcuts import render,redirect,reverse
 from . import forms,models
 from django.db.models import Sum
@@ -251,6 +252,8 @@ def deactivate_doctor_view(request,pk):
     user=models.User.objects.get(id=doctor.user_id)
     user.is_active= not (user.is_active)
     doctor.is_active= not (doctor.is_active)
+    user.save()
+    doctor.save()
     return redirect('admin-view-doctor')
 
 

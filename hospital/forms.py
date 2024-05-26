@@ -49,7 +49,7 @@ class PatientForm(forms.ModelForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
+    doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(is_active=True),empty_label="Doctor Name and Department", to_field_name="user_id")
     patientId=forms.ModelChoiceField(queryset=models.Patient.objects.all().filter(status=True),empty_label="Patient Name and Symptoms", to_field_name="user_id")
     class Meta:
         model=models.Appointment
@@ -57,7 +57,11 @@ class AppointmentForm(forms.ModelForm):
 
 
 class PatientAppointmentForm(forms.ModelForm):
-    doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
+    doctorId = forms.ModelChoiceField(
+    queryset=models.Doctor.objects.filter(is_active=1),
+    empty_label="Doctor Name and Department",
+    to_field_name="user_id"
+)
     class Meta:
         model=models.Appointment
         fields=['appointmentDate','description','status','time']
